@@ -55,6 +55,7 @@ class OrgTree {
             initialZoom: 0.4,
             orientation: 'right-to-left',
             onNodeClick: d => d,
+            onNodeHover: d => d,
             onNodeAdd: d => d,
             onNodeRemove: d => d,
         };
@@ -615,6 +616,9 @@ class OrgTree {
             .attr('id', d => d.id)
             .attr("transform", d => `translate(${x0},${y0})`)
             .attr('cursor', 'pointer')
+            .on('mouseover', ({data}) => {
+              attrs.onNodeHover(data.nodeId);
+            })
             .on('click', ({data}) => {
                 if ([...d3.event.srcElement.classList].includes('node-expand-button-circle') || [...d3.event.srcElement.classList].includes('node-add-button-circle') || [...d3.event.srcElement.classList].includes('node-remove-button-circle')) {
                     return;
