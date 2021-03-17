@@ -17,7 +17,7 @@
     "customizable"
   ],
   "dependencies": {
-    "d3": "^5.16.0"
+    "d3": "*"
   },
   "author": "benyasin",
   "license": "ISC",
