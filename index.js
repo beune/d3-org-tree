@@ -616,12 +616,17 @@ class OrgTree {
             .attr('id', d => d.id)
             .attr("transform", d => `translate(${x0},${y0})`)
             .attr('cursor', 'pointer')
-            .on('mouseover', (_, data) => {
-              attrs.onNodeHover(data.id);
+            .on('mouseover', ({data}) => {
+              attrs.onNodeHover(data.nodeId);
             })
-            .on('click', (_, data) => {
+            .on('click', ({data}) => {
+                if ([...d3.event.srcElement.classList].includes('node-expand-button-circle') || [...d3.event.srcElement.classList].includes('node-add-button-circle') || [...d3.event.srcElement.classList].includes('node-remove-button-circle')) {
+                    return;
+                }
+
                 //remove the previous current node style
-                d3.selectAll('g.node.current > .node-rect') .attr('stroke-width', ({data}) => data.borderWidth || attrs.strokeWidth)
+                d3.selectAll('g.node.current > .node-rect')
+                    .attr('stroke-width', ({data}) => data.borderWidth || attrs.strokeWidth)
                     .attr('stroke', ({borderColor}) => borderColor)
                     .style("fill", ({backgroundColor}) => backgroundColor)
 
@@ -629,14 +634,14 @@ class OrgTree {
                     d3.selectAll('g.node.current').node().classList.remove("current")
                 }
 
-                attrs.current = data.id
+                attrs.current = data.nodeId
                 //add the target node current style
-                d3.select('#' + data.id).node().classList.add("current")
-                d3.select('#' + data.id + ' > .node-rect')
+                d3.select('#' + data.nodeId).node().classList.add("current")
+                d3.select('#' + data.nodeId + ' > .node-rect')
                     .attr('stroke-width', attrs['highlight']['borderWidth'] || attrs['highlight']['strokeWidth'])
                     .attr('stroke', this.rgbaObjToColor(attrs['highlight']['borderColor']))
                     .style("fill", this.rgbaObjToColor(attrs['highlight']['backgroundColor']))
-                attrs.onNodeClick(data.id);
+                attrs.onNodeClick(data.nodeId);
             });
 
         // Add background rectangle for the nodes
