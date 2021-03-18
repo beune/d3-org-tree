@@ -723,8 +723,8 @@ class OrgTree {
             .attr('cursor', 'pointer')
             //can define highlight style
             .attr('stroke-width', ({data}) =>
-                data.nodeId === attrs.current ? (attrs['highlight']['borderWidth'] || attrs['highlight']['strokeWidth']) : (data.borderWidth || attrs.strokeWidth)
-            )
+                data.lowConfidence ? (100) : (data.nodeId === attrs.current ? (attrs['highlight']['borderWidth'] || attrs['highlight']['strokeWidth']) : (data.borderWidth || attrs.strokeWidth)))
+            .attr("stroke-opacity", ({data}) => data.lowConfidence ? .5 : 1)
             .attr('stroke', ({data, borderColor}) => data.nodeId === attrs.current ? this.rgbaObjToColor(attrs['highlight']['borderColor']) : borderColor)
             .style("fill", ({data, backgroundColor}) => data.nodeId === attrs.current ? this.rgbaObjToColor(attrs['highlight']['backgroundColor']) : backgroundColor)
 
