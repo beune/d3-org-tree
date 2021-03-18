@@ -527,6 +527,10 @@ class OrgTree {
                 if (d.data.backgroundColor) {
                     backgroundColor = this.rgbaObjToColor(d.data.backgroundColor);
                 }
+                if (d.data.valueNode){
+                  borderColor = this.rgbaObjToColor({ red: "239", green: "113", blue: "4", alpha: "1" })
+                  backgroundColor = this.rgbaObjToColor({ red: "239", green: "113", blue: "4", alpha: "1" })
+                }
 
                 // Extend node object with calculated properties
                 return Object.assign(d, {
@@ -908,7 +912,8 @@ class OrgTree {
         attrs.svg.selectAll('.node-foreign-object-div')
             .style('width', ({width}) => `${width}px`)
             .style('height', ({height}) => `${height}px`)
-            .style('color', 'white')
+            // Change text color based on whether value
+            .style('color', ({data}) => data.valueNode ? 'white' : '#2d3077')
             .html(({data}) => data.template)
     }
 
