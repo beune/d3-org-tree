@@ -60,6 +60,8 @@ class OrgTree {
             //CHANGE: default tree orientation
             orientation: 'left-to-right',
             onNodeClick: d => d,
+            //CHANGE: added onNodeHoverOut, this is called when the mouse hovers away from the node
+            onNodeHoverOut: d => d,
             //CHANGE: added onNodeHover, this is called when the mouse hovers over the node
             onNodeHover: d => d,
             onNodeAdd: d => d,
@@ -629,6 +631,10 @@ class OrgTree {
             .attr('id', d => d.id)
             .attr("transform", d => `translate(${x0},${y0})`)
             .attr('cursor', 'pointer')
+            //CHANGE: add callback for when mouse hovers away from node
+            .on('mouseout', ({data}) => {
+              attrs.onNodeHoverOut(data.nodeId);
+            })
             //CHANGE: add callback for when mouse hovers over node
             .on('mouseover', ({data}) => {
               attrs.onNodeHover(data.nodeId);
