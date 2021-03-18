@@ -623,24 +623,6 @@ class OrgTree {
                 if ([...d3.event.srcElement.classList].includes('node-expand-button-circle') || [...d3.event.srcElement.classList].includes('node-add-button-circle') || [...d3.event.srcElement.classList].includes('node-remove-button-circle')) {
                     return;
                 }
-
-                //remove the previous current node style
-                d3.selectAll('g.node.current > .node-rect')
-                    .attr('stroke-width', ({data}) => data.borderWidth || attrs.strokeWidth)
-                    .attr('stroke', ({borderColor}) => borderColor)
-                    .style("fill", ({backgroundColor}) => backgroundColor)
-
-                if (attrs.current && d3.selectAll('g.node.current').length) {
-                    d3.selectAll('g.node.current').node().classList.remove("current")
-                }
-
-                attrs.current = data.nodeId
-                //add the target node current style
-                d3.select('#' + data.nodeId).node().classList.add("current")
-                d3.select('#' + data.nodeId + ' > .node-rect')
-                    .attr('stroke-width', attrs['highlight']['borderWidth'] || attrs['highlight']['strokeWidth'])
-                    .attr('stroke', this.rgbaObjToColor(attrs['highlight']['borderColor']))
-                    .style("fill", this.rgbaObjToColor(attrs['highlight']['backgroundColor']))
                 attrs.onNodeClick(data.nodeId);
             });
 
