@@ -53,7 +53,7 @@ class OrgTree {
             duration: 0,
             strokeWidth: 3,
             initialZoom: 0.4,
-            orientation: 'right-to-left',
+            orientation: 'left-to-right',
             onNodeClick: d => d,
             onNodeHover: d => d,
             onNodeAdd: d => d,
