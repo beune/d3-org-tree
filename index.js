@@ -719,7 +719,7 @@ class OrgTree {
             .attr('height', ({data}) => data.height)
             .attr('x', ({data}) => -data.width / 2)
             .attr('y', ({data}) => -data.height / 2)
-            .attr('rx', ({data}) => data.borderRadius || 0)
+            .attr('rx', ({data}) => data.borderRadius || 15)
             .attr('cursor', 'pointer')
             //can define highlight style
             .attr('stroke-width', ({data}) =>
