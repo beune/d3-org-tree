@@ -39,9 +39,9 @@ class OrgTree {
                 }
             },
             linkColor: {
-                "red": 11,
-                "green": 123,
-                "blue": 108,
+                "red": 45,
+                "green": 48,
+                "blue": 119,
                 "alpha": 1
             },
             linkWidth: 5,
