@@ -20,7 +20,7 @@ class OrgTree {
             defaultTextFill: '#2C3E50',
             nodeTextFill: 'white',
             defaultFont: 'Helvetica',
-            backgroundColor: '#fafafa',
+            backgroundColor: '#ffffff',
             data: null,
             highlight: {
                 "borderWidth": 1,
@@ -45,12 +45,12 @@ class OrgTree {
                 "alpha": 1
             },
             linkWidth: 5,
-            displayArrow: false,
+            displayArrow: true,
             straightLink: false,
             collapsible: false,
             current: null,
             depth: 180,
-            duration: 600,
+            duration: 0,
             strokeWidth: 3,
             initialZoom: 0.4,
             orientation: 'right-to-left',
