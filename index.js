@@ -515,8 +515,8 @@ class OrgTree {
                 let imageRx = 0;
                 let imageCenterTopDistance = 0;
                 let imageCenterLeftDistance = 0;
-                let borderColor = 'steelblue';
-                let backgroundColor = 'steelblue';
+                let borderColor = '#2d3077';
+                let backgroundColor = '#ffffff';
                 let width = d.data.width;
                 let height = d.data.height;
 
