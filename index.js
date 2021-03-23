@@ -633,18 +633,21 @@ class OrgTree {
             .attr('cursor', 'pointer')
             //CHANGE: add callback for when mouse hovers away from node
             .on('mouseout', ({data}) => {
-              attrs.onNodeHoverOut(data.nodeId);
+              //CHANGE do not pass nodeId to callback, but entire node object
+              attrs.onNodeHoverOut(data);
             })
             //CHANGE: add callback for when mouse hovers over node
             .on('mouseover', ({data}) => {
-              attrs.onNodeHover(data.nodeId);
+              //CHANGE do not pass nodeId to callback, but entire node object
+              attrs.onNodeHover(data);
             })
             .on('click', ({data}) => {
                 if ([...d3.event.srcElement.classList].includes('node-expand-button-circle') || [...d3.event.srcElement.classList].includes('node-add-button-circle') || [...d3.event.srcElement.classList].includes('node-remove-button-circle')) {
                     return;
                 }
                 //CHANGE: do not change color of the node if it is clicked.
-                attrs.onNodeClick(data.nodeId);
+                //CHANGE do not pass nodeId to callback, but entire node object
+                attrs.onNodeClick(data);
             });
 
         // Add background rectangle for the nodes
