@@ -641,7 +641,10 @@ class OrgTree {
               //CHANGE do not pass nodeId to callback, but entire node object
               attrs.onNodeHover(data);
             })
-            .on('click', ({data}) => {
+            // CHANGE: on click to on contextmenu
+            .on('contextmenu', ({data}) => {
+              // CHANGE: event.preventDefault()
+              d3.event.preventDefault()
                 if ([...d3.event.srcElement.classList].includes('node-expand-button-circle') || [...d3.event.srcElement.classList].includes('node-add-button-circle') || [...d3.event.srcElement.classList].includes('node-remove-button-circle')) {
                     return;
                 }
