@@ -747,12 +747,15 @@ class OrgTree {
             .attr('cursor', 'pointer')
             //can define highlight style
             .attr('stroke-width', ({data}) =>
-                //CHANGE: stroke width based on whether the confidence of the node is low
-                data.lowConfidence ? (100) : (data.nodeId === attrs.current ? (attrs['highlight']['borderWidth'] || attrs['highlight']['strokeWidth']) : (data.borderWidth || attrs.strokeWidth)))
+                //CHANGE: stroke width based on whether the confidence of the node is low, and if the node is a value node
+                // This is only for value nodes because category nodes need a different stroke
+                data.lowConfidence && data.valueNode ? (100) : (data.nodeId === attrs.current ? (attrs['highlight']['borderWidth'] || attrs['highlight']['strokeWidth']) : (data.borderWidth || attrs.strokeWidth)))
                 //CHANGE: stroke opacity based on whether the confidence of the node is low
             .attr("stroke-opacity", ({data}) => data.lowConfidence ? .5 : 1)
             .attr('stroke', ({data, borderColor}) => data.nodeId === attrs.current ? this.rgbaObjToColor(attrs['highlight']['borderColor']) : borderColor)
             .style("fill", ({data, backgroundColor}) => data.nodeId === attrs.current ? this.rgbaObjToColor(attrs['highlight']['backgroundColor']) : backgroundColor)
+            //CHANGE: stroke outline based on whether the confidence of the node is low, and if the node is a category node
+            .style("outline", ({data}) => data.lowConfidence && !data.valueNode ? "30px solid rgba(45, 48, 119, .5)" : "")
 
 
         //Move node button group to the desired position
