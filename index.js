@@ -386,7 +386,8 @@ class OrgTree {
 
         // Generate tree layout function
         layouts.treemap = d3.tree().size([calc.chartWidth, calc.chartHeight])
-            .nodeSize([calc.nodeMaxWidth + 100, calc.nodeMaxHeight + 100])
+        //CHANGE: the nodeMax from '+ 100' to '- 100'. This results in the tree leaves being closer together.
+            .nodeSize([calc.nodeMaxWidth - 100, calc.nodeMaxHeight - 100])
 
         // ******************* BEHAVIORS . **********************
         const behaviors = {zoom: null}
