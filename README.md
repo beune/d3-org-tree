@@ -5,13 +5,13 @@
 
 <div style="width: 100%; height:150px; text-align:center; display:flex; flex-direction: row; justify-content: center; align-items: center;">
   <a href="javascript:void(0)" style="display:inline-block;">
-    <img src="https://user-images.githubusercontent.com/1866848/88040200-21ff0b00-cb7b-11ea-842c-b853c01fd1d2.png" width="60%">
+    <img src="https://user-images.githubusercontent.com/1866848/112085779-165e5b00-8bc6-11eb-9fea-82498bb953d5.png" width="60%">
   </a>
 </div>
 
 ## Futures
 
-`d3-org-tree` is highly customizable tree built with d3.js v5 that can run in modern browser like `Chrome`, `Edge`, `Firefox` and `Safari`.
+`d3-org-tree` is highly customizable tree built with d3.js v6 that can run in modern browser like `Chrome`, `Edge`, `Firefox` and `Safari`.
 Except d3.js, it does not have any third-party dependencies.
 
 Some d3-org-tree features:
@@ -153,6 +153,10 @@ orgTree.container('body') //dom element
 |  removeNode(nodeId)  | `function`, remove a node by the nodeId |
 
 ## Changelog
+
+**0.0.9** Changes:
+
+* Make it compatible with the latest version of d3
 
 **0.0.8** Changes:
 
