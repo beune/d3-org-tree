@@ -26,26 +26,11 @@ class OrgTree {
             highlight: {
                 "borderWidth": 1,
                 "borderRadius": 15,
-                "borderColor": {
-                    "red": 50,
-                    "green": 255,
-                    "blue": 30,
-                    "alpha": 1
-                },
-                "backgroundColor": {
-                    "red": 20,
-                    "green": 100,
-                    "blue": 40,
-                    "alpha": 1
-                }
+                "borderColor": "#32FF1E",
+                "backgroundColor": "#146428"
             },
             //CHANGE: default link color
-            linkColor: {
-                "red": 45,
-                "green": 48,
-                "blue": 119,
-                "alpha": 1
-            },
+            linkColor: "#2D3077",
             linkWidth: 5,
             //CHANGE: whether to display arrows by default
             displayArrow: true,
@@ -469,7 +454,8 @@ class OrgTree {
             .attr('orient', 'auto-start-reverse')
             .append('path')
             .attr('d', 'M 0,0 m -2,-2 L 2,0 L -2,2 Z')
-            .attr('fill', () => this.rgbaObjToColor(attrs.linkColor) || 'green')
+            //CHANGE: default link color
+            .attr('fill', () => "#2D3077" || 'green')
 
         //Add container g element
         const chart = svg
@@ -533,15 +519,15 @@ class OrgTree {
 
                 // Override default values based on data
                 if (d.data.borderColor) {
-                    borderColor = this.rgbaObjToColor(d.data.borderColor);
+                    borderColor = d.data.borderColor;
                 }
                 if (d.data.backgroundColor) {
-                    backgroundColor = this.rgbaObjToColor(d.data.backgroundColor);
+                    backgroundColor = d.data.backgroundColor;
                 }
                 //CHANGE: borderColor and backgroundColor if the node is a value node
                 if (d.data.valueNode){
-                  borderColor = this.rgbaObjToColor({ red: "239", green: "113", blue: "4", alpha: "1" })
-                  backgroundColor = this.rgbaObjToColor({ red: "239", green: "113", blue: "4", alpha: "1" })
+                  borderColor = "#EF7104"
+                  backgroundColor = "#EF7104"
                 }
 
                 // Extend node object with calculated properties
@@ -598,7 +584,8 @@ class OrgTree {
             })
             .attr("fill", "none")
             .attr("stroke-width", () => attrs.linkWidth || 2)
-            .attr('stroke', () => this.rgbaObjToColor(attrs.linkColor) || 'green')
+            //CHANGE: default link color
+            .attr('stroke', () => "#2D3077" || 'green')
 
         // Transition back to the parent element position
         linkUpdate.transition()
@@ -753,10 +740,10 @@ class OrgTree {
                 data.lowConfidence && data.valueNode ? (100) : (data.nodeId === attrs.current ? (attrs['highlight']['borderWidth'] || attrs['highlight']['strokeWidth']) : (data.borderWidth || attrs.strokeWidth)))
                 //CHANGE: stroke opacity based on whether the confidence of the node is low
             .attr("stroke-opacity", ({data}) => data.lowConfidence ? .5 : 1)
-            .attr('stroke', ({data, borderColor}) => data.nodeId === attrs.current ? this.rgbaObjToColor(attrs['highlight']['borderColor']) : borderColor)
-            .style("fill", ({data, backgroundColor}) => data.nodeId === attrs.current ? this.rgbaObjToColor(attrs['highlight']['backgroundColor']) : backgroundColor)
+            .attr('stroke', ({data, borderColor}) => data.nodeId === attrs.current ? attrs['highlight']['borderColor'] : borderColor)
+            .style("fill", ({data, backgroundColor}) => data.nodeId === attrs.current ? attrs['highlight']['backgroundColor'] : backgroundColor)
             //CHANGE: stroke outline based on whether the confidence of the node is low, and if the node is a category node
-            .style("outline", ({data}) => data.lowConfidence && !data.valueNode ? "30px solid rgba(45, 48, 119, .5)" : "")
+            .style("outline", ({data}) => data.lowConfidence && !data.valueNode ? data.strokeColor ? `30px solid ${data.strokeColor}` : "30px solid rgba(45, 48, 119, .5)" : "")
 
 
         //Move node button group to the desired position
@@ -942,8 +929,8 @@ class OrgTree {
         attrs.svg.selectAll('.node-foreign-object-div')
             .style('width', ({width}) => `${width}px`)
             .style('height', ({height}) => `${height}px`)
-            //CHANGE: text color based on whether value node
-            .style('color', ({data}) => data.valueNode ? 'white' : '#2d3077')
+            //CHANGE: text color based on whether it is specified or whether it is a value node
+            .style('color', ({data}) => data.textColor ? data.textColor : data.valueNode ? 'white' : '#2d3077')
             .html(({data}) => data.template)
     }
 
