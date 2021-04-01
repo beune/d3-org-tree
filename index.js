@@ -524,11 +524,6 @@ class OrgTree {
                 if (d.data.backgroundColor) {
                     backgroundColor = d.data.backgroundColor;
                 }
-                //CHANGE: borderColor and backgroundColor if the node is a value node
-                if (d.data.valueNode){
-                  borderColor = "#EF7104"
-                  backgroundColor = "#EF7104"
-                }
 
                 // Extend node object with calculated properties
                 return Object.assign(d, {
@@ -735,15 +730,13 @@ class OrgTree {
             .attr('cursor', 'pointer')
             //can define highlight style
             .attr('stroke-width', ({data}) =>
-                //CHANGE: stroke width based on whether the confidence of the node is low, and if the node is a value node
-                // This is only for value nodes because category nodes need a different stroke
-                data.lowConfidence && data.valueNode ? (100) : (data.nodeId === attrs.current ? (attrs['highlight']['borderWidth'] || attrs['highlight']['strokeWidth']) : (data.borderWidth || attrs.strokeWidth)))
-                //CHANGE: stroke opacity based on whether the confidence of the node is low
-            .attr("stroke-opacity", ({data}) => data.lowConfidence ? .5 : 1)
-            .attr('stroke', ({data, borderColor}) => data.nodeId === attrs.current ? attrs['highlight']['borderColor'] : borderColor)
+                data.nodeId === attrs.current ? (attrs['highlight']['borderWidth'] || attrs['highlight']['strokeWidth']) : (data.borderWidth || attrs.strokeWidth)
+            )
+            //CHANGE: stroke based on whether it is specified
+            .attr('stroke', ({data, borderColor}) => data.outlineColor ? data.outlineColor : data.nodeId === attrs.current ? attrs['highlight']['borderColor'] : borderColor)
             .style("fill", ({data, backgroundColor}) => data.nodeId === attrs.current ? attrs['highlight']['backgroundColor'] : backgroundColor)
-            //CHANGE: stroke outline based on whether the confidence of the node is low, and if the node is a category node
-            .style("outline", ({data}) => data.lowConfidence && !data.valueNode ? data.strokeColor ? `30px solid ${data.strokeColor}` : "30px solid rgba(45, 48, 119, .5)" : "")
+            //CHANGE: outline color based on whether it is specified
+            .style("outline", ({data}) => data.outlineColor ? `30px solid ${data.outlineColor}50` : "" )
 
 
         //Move node button group to the desired position
@@ -929,8 +922,8 @@ class OrgTree {
         attrs.svg.selectAll('.node-foreign-object-div')
             .style('width', ({width}) => `${width}px`)
             .style('height', ({height}) => `${height}px`)
-            //CHANGE: text color based on whether it is specified or whether it is a value node
-            .style('color', ({data}) => data.textColor ? data.textColor : data.valueNode ? 'white' : '#2d3077')
+            //CHANGE: text color based on whether it is specified
+            .style('color', ({data}) => data.textColor ? data.textColor : '#2d3077')
             .html(({data}) => data.template)
     }
 
