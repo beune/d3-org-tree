@@ -1,6 +1,6 @@
 {
   "name": "d3-org-tree",
-  "version": "0.0.8",
+  "version": "0.1.0",
   "description": "A highly customizable org tree built with d3.js v5",
   "main": "index.js",
   "scripts": {
@@ -17,7 +17,7 @@
     "customizable"
   ],
   "dependencies": {
-    "d3": "*"
+    "d3": "^5.16.0"
   },
   "author": "benyasin",
   "license": "ISC",
