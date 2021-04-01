@@ -735,8 +735,8 @@ class OrgTree {
             //CHANGE: stroke based on whether it is specified
             .attr('stroke', ({data, borderColor}) => data.outlineColor ? data.outlineColor : data.nodeId === attrs.current ? attrs['highlight']['borderColor'] : borderColor)
             .style("fill", ({data, backgroundColor}) => data.nodeId === attrs.current ? attrs['highlight']['backgroundColor'] : backgroundColor)
-            //CHANGE: outline color based on whether it is specified
-            .style("outline", ({data}) => data.outlineColor ? `30px solid ${data.outlineColor}50` : "" )
+            //CHANGE: outline color based on whether it is specified and if confidence is low
+            .style("outline", ({data}) => data.outlineColor && data.lowConfidence ? `30px solid ${data.outlineColor}50` : "" )
 
 
         //Move node button group to the desired position
